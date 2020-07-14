@@ -5,7 +5,7 @@
   <description>
     Tutorial on how to implement a robot controller with I/O using ROS
   </description>
-  <maintainer email="s.nakaoka@gmailcom">Shin'ichiro Nakaoka</maintainer>
+  <maintainer email="s.nakaoka@gmail.com">Shin'ichiro Nakaoka</maintainer>
   <license>MIT</license>
   <author email="s.nakaoka@gmail.com">Shin'ichiro Nakaoka</author>
   <url type="website">http://choreonoid.org</url>
