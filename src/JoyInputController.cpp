@@ -45,17 +45,15 @@ public:
 
         trackL = body->link("TRACK_L");
         trackR = body->link("TRACK_R");
-        trackL->setActuationMode(Link::JOINT_SURFACE_VELOCITY);
-        trackR->setActuationMode(Link::JOINT_SURFACE_VELOCITY);
-        io->enableOutput(trackL);
-        io->enableOutput(trackR);
+        io->enableOutput(trackL, JointVelocity);
+        io->enableOutput(trackR, JointVelocity);
 
         turretJoint[0] = body->link("TURRET_Y");
         turretJoint[1] = body->link("TURRET_P");
         for(int i=0; i < 2; ++i){
             Link* joint = turretJoint[i];
             qref[i] = qprev[i] = joint->q();
-            joint->setActuationMode(Link::ActuationMode::JOINT_TORQUE);
+            joint->setActuationMode(JointTorque);
             io->enableIO(joint);
         }
 
