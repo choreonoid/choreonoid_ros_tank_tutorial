@@ -57,7 +57,8 @@ public:
             io->enableIO(joint);
         }
 
-        joystickSubscriber = node->subscribe("joy", 1, &JoyInputController::joystickCallback, this);
+        joystickSubscriber = node->subscribe(
+            "joy", 1, &JoyInputController::joystickCallback, this);
 
         return true;
     }

@@ -8,16 +8,12 @@
 using namespace std;
 using namespace cnoid;
 
-namespace {
-const double frequency = 20.0;
-}
-
 class ImuOutputController : public SimpleController
 {
     AccelerationSensorPtr accelSensor;
     RateGyroSensorPtr gyro;
     ScopedConnectionSet sensorConnections;
-    ros::NodeHandle node;
+    std::unique_ptr<ros::NodeHandle> node;
     ros::Publisher imuPublisher;
     sensor_msgs::Imu imu;
     double time;
@@ -26,10 +22,11 @@ class ImuOutputController : public SimpleController
     double timeCounter;
 
 public:
-    ImuOutputController()
-        : node("tank")
+    virtual bool configure(SimpleControllerConfig* config) override
     {
-        imuPublisher = node.advertise<sensor_msgs::Imu>("imu", 1000);
+        node.reset(new ros::NodeHandle(config->body()->name()));
+        imuPublisher = node->advertise<sensor_msgs::Imu>("imu", 1);
+        return true;
     }
 
     virtual bool initialize(SimpleControllerIO* io) override
@@ -73,6 +70,7 @@ public:
 
         time = 0.0;
         timeStep = io->timeStep();
+        const double frequency = 20.0;
         cycleTime = 1.0 / frequency;
         timeCounter = 0.0;
 

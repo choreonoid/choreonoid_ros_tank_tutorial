@@ -11,17 +11,18 @@ class CameraImageOutputController : public SimpleController
 {
     CameraPtr camera;
     ScopedConnection cameraConnection;
-    ros::NodeHandle node;
+    std::unique_ptr<ros::NodeHandle> node;
     image_transport::Publisher cameraImagePublisher;
     double time;
     double timeStep;
 
 public:
-    CameraImageOutputController()
-        : node("tank")
+    virtual bool configure(SimpleControllerConfig* config) override
     {
-        image_transport::ImageTransport imageTransport(node);
-        cameraImagePublisher = imageTransport.advertise("camera/image", 1000);
+        node.reset(new ros::NodeHandle(config->body()->name()));
+        image_transport::ImageTransport imageTransport(*node);
+        cameraImagePublisher = imageTransport.advertise("camera/image", 1);
+        return true;
     }
 
     virtual bool initialize(SimpleControllerIO* io) override

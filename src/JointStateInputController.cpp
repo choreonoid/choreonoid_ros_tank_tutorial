@@ -36,7 +36,7 @@ public:
         }
 
         jointStateSubscriber = node.subscribe(
-            "tank/joint_state", 1, &JointStateInputController::jointStateCallback, this);
+            "Tank/joint_state", 1, &JointStateInputController::jointStateCallback, this);
 
         return true;
     }
