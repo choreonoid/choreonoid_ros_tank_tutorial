@@ -3,5 +3,6 @@
   <node pkg="choreonoid_ros" name="choreonoid" type="choreonoid"
 	args="$(find choreonoid_ros_tank_tutorial)/project/step2.cnoid --start-simulation" />
   <node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
-  <node pkg="rqt_plot" name="rqt_plot" type="rqt_plot" args="/Tank/joint_state/position[0] /Tank/joint_state/position[1]" />
+  <node pkg="rqt_plot" name="rqt_plot" type="rqt_plot"
+        args="/Tank/joint_state/position[0] /Tank/joint_state/position[1]" />
 </launch>

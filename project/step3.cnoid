@@ -6,399 +6,77 @@ items:
   children: 
     - 
       id: 1
-      name: "World"
+      name: "Tank"
       plugin: Body
-      class: WorldItem
+      class: BodyItem
+      is_checked: true
       data: 
-        collisionDetection: false
-        collisionDetector: AISTCollisionDetector
-        materialTableFile: "${SHARE}/default/materials.yaml"
+        file: "${SHARE}/model/Tank/Tank.body"
+        format: CHOREONOID-BODY
+        rootPosition: [ -2, -0.5, 0.1 ]
+        rootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        jointDisplacements: [ 0, 0, 0, 0 ]
+        jointPositions: [ 0, 0, 0, 0 ]
+        initialRootPosition: [ -2, -0.5, 0.1 ]
+        initialRootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        initialJointPositions: [ 0, 0, 0, 0 ]
+        staticModel: false
+        collisionDetection: true
+        selfCollisionDetection: false
+        location_editable: true
+        scene_sensitive: true
+        zmp: [ 0, 0, 0 ]
       children: 
         - 
           id: 2
-          name: "Tank"
+          name: "JointStateSubscriber"
           plugin: Body
-          class: BodyItem
+          class: SimpleControllerItem
           data: 
-            modelFile: "${SHARE}/model/Tank/Tank.body"
-            currentBaseLink: ""
-            rootPosition: [ -2, -0.5, 0.1 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [  0.000000,  0.000000 ]
-            jointPositions: [  0.000000,  0.000000 ]
-            initialRootPosition: [ -2, -0.5, 0.1 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [  0.000000,  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: true
-          children: 
-            - 
-              id: 3
-              name: "JoyInputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: true
-                controllerOptions: ""
-                controller: "JoyInputController"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-            - 
-              id: 4
-              name: "JointStateOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "JointStateOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-        - 
-          id: 5
-          name: "Tank2"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "${SHARE}/model/Tank/Tank.body"
-            currentBaseLink: ""
-            rootPosition: [ 2, -0.5, 0.1 ]
-            rootAttitude: [ 
-              -1, -1.2246468e-16, 0, 
-              1.2246468e-16, -1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [  0.000000,  0.000000 ]
-            jointPositions: [  0.000000,  0.000000 ]
-            initialRootPosition: [ 2, -0.5, 0.1 ]
-            initialRootAttitude: [ 
-              -1, -1.2246468e-16, 0, 
-              1.2246468e-16, -1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [  0.000000,  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: true
-          children: 
-            - 
-              id: 6
-              name: "JointStateInputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "JointStateInputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-        - 
-          id: 7
-          name: "Labo1"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "${SHARE}/model/Labo1/Labo1.body"
-            currentBaseLink: ""
-            rootPosition: [ 0, 0, 0 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [  0.000000 ]
-            jointPositions: [  0.000000 ]
-            initialRootPosition: [ 0, 0, 0 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: false
-        - 
-          id: 8
-          name: "AISTSimulator"
-          plugin: Body
-          class: AISTSimulatorItem
-          data: 
-            timeStep: 0.001
-            realtimeSync: true
-            recording: "off"
-            timeRangeMode: "Unlimited"
-            timeLength: 60
-            allLinkPositionOutputMode: false
-            deviceStateOutput: true
-            controllerThreads: true
-            recordCollisionData: false
+            isNoDelayMode: true
             controllerOptions: ""
-            dynamicsMode: "Forward dynamics"
-            integrationMode: "Runge Kutta"
-            gravity: [ 0, 0, -9.80665 ]
-            staticFriction: 0.5
-            dynamicFriction: 0.5
-            cullingThresh: 0.01
-            contactCullingDepth: 0.05
-            errorCriterion: 0.001
-            maxNumIterations: 1000
-            contactCorrectionDepth: 0.0001
-            contactCorrectionVelocityRatio: 30
-            kinematicWalking: false
-            2Dmode: false
-            oldAccelSensorMode: false
+            controller: "JointStateSubscriber"
+            baseDirectory: "Controller directory"
+            reloading: false
+            exportSymbols: false
+            isOldTargetVariableMode: false
 views: 
-  - 
-    id: 0
-    plugin: Base
-    class: ItemPropertyView
-    mounted: true
   - 
     id: 1
     plugin: Base
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 1, 2, 5, 7 ]
-      expanded: [ 1, 2, 5, 8 ]
-  - 
-    id: 2
-    plugin: Base
-    class: MessageView
-    mounted: true
-  - 
-    id: 3
-    plugin: Base
-    class: SceneView
-    mounted: true
-    state: 
-      editMode: false
-      viewpointControlMode: thirdPerson
-      collisionLines: false
-      polygonMode: fill
-      restrictCameraRoll: true
-      verticalAxis: Z
-      lightingMode: full
-      cullingMode: enabled
-      defaultHeadLight: true
-      defaultHeadLightIntensity: 0.5
-      headLightLightingFromBack: false
-      worldLight: false
-      worldLightIntensity: 0.1
-      worldLightAmbient: 0
-      additionalLights: true
-      shadowLights: 
-        - 1
-        - 2
-      fog: true
-      floorGrid: false
-      floorGridSpan: 10
-      floorGridInterval: 0.5
-      xzGridSpan: 10
-      xzGridInterval: 0.5
-      xzGrid: false
-      yzGridSpan: 10
-      yzGridInterval: 0.5
-      texture: true
-      lineWidth: 1
-      pointSize: 1
-      normalVisualization: false
-      normalLength: 0.01
-      lightweightViewChange: false
-      coordinateAxes: true
-      fpsTestIteration: 1
-      upsideDown: false
-      cameras: 
-        - 
-          camera: [ System, Perspective ]
-          isCurrent: true
-          fieldOfView: 0.6978
-          near: 0.01
-          far: 10000
-          eye: [ -4.83764074, -3.02200817, 2.67508791 ]
-          direction: [ 0.768470642, 0.539452159, -0.344157291 ]
-          up: [ 0.281682172, 0.197735669, 0.938912008 ]
-        - 
-          camera: [ System, Orthographic ]
-          orthoHeight: 20
-          near: 0.01
-          far: 10000
-      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
-      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      dedicatedItemTreeViewChecks: false
+      expanded: [ 1 ]
   - 
     id: 4
-    name: "Scene 2"
     plugin: Base
     class: SceneView
     mounted: true
     state: 
-      editMode: false
-      viewpointControlMode: thirdPerson
-      collisionLines: false
-      polygonMode: fill
-      restrictCameraRoll: true
-      verticalAxis: Z
-      lightingMode: full
-      cullingMode: enabled
-      defaultHeadLight: true
-      defaultHeadLightIntensity: 0.5
-      headLightLightingFromBack: false
-      worldLight: false
-      worldLightIntensity: 0.5
-      worldLightAmbient: 0.3
-      additionalLights: true
-      shadowLights: 
-        - 1
-        - 2
-      fog: true
-      floorGrid: false
-      floorGridSpan: 10
-      floorGridInterval: 0.5
-      xzGridSpan: 10
-      xzGridInterval: 0.5
-      xzGrid: false
-      yzGridSpan: 10
-      yzGridInterval: 0.5
-      texture: true
-      lineWidth: 1
-      pointSize: 1
-      normalVisualization: false
-      normalLength: 0.01
-      lightweightViewChange: false
-      coordinateAxes: true
-      fpsTestIteration: 1
-      upsideDown: false
       cameras: 
         - 
           camera: [ System, Perspective ]
           isCurrent: true
-          fieldOfView: 0.6978
-          near: 0.01
-          far: 100
-          eye: [ -5.29126118, -5.01169376, 3.84184278 ]
-          direction: [ 0.756596254, 0.487150344, -0.43617273 ]
-          up: [ 0.3667299, 0.236126726, 0.899862962 ]
+          fieldOfView: 0.610865
+          near: 0.04
+          far: 200
+          eye: [ -0.870505, 0.215835, 0.544346 ]
+          direction: [ -0.798282, -0.550419, -0.244509 ]
+          up: [ -0.201297, -0.138795, 0.969647 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
-          near: 0.01
-          far: 100
-      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
-      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      dedicatedItemTreeViewChecks: false
-  - 
-    id: 5
-    plugin: Body
-    class: BodyLinkView
-    state: 
-      showRotationMatrix: false
-  - 
-    id: 6
-    plugin: Body
-    class: JointDisplacementView
-    state: 
-      showSelectedJoints: false
-      showJointIDs: false
-      showJointNames: true
-      overlapJointNames: false
-      showSliders: true
-      showDials: false
-      showPhases: false
-  - 
-    id: 7
-    name: "Link Properties"
-    plugin: Body
-    class: LinkPropertyView
-  - 
-    id: 8
-    plugin: Body
-    class: LinkSelectionView
-    state: 
-      listingMode: "Link List"
-      currentBodyItem: 2
-      bodyItems: 
-        - 
-          id: 2
-          selectedLinks: [ 0 ]
-        - 
-          id: 5
-          selectedLinks: [ 0 ]
-  - 
-    id: 9
-    name: "Position"
-    plugin: Body
-    class: PositionView
-    state: 
-      coordinateMode: world
-      preferredCoordinateMode: body
-      showRPY: true
-      uniqueRPY: false
-      showQuoternion: false
-      showRotationMatrix: false
-      disableCustomIK: false
-  - 
-    id: 10
-    plugin: Python
-    class: PythonConsoleView
-viewAreas: 
-  - 
-    type: embedded
-    tabs: true
-    contents: 
-      type: splitter
-      orientation: horizontal
-      sizes: [ 254, 1082 ]
-      children: 
-        - 
-          type: splitter
-          orientation: vertical
-          sizes: [ 410, 409 ]
-          children: 
-            - 
-              type: pane
-              views: [ 1 ]
-              current: 1
-            - 
-              type: pane
-              views: [ 0 ]
-              current: 0
-        - 
-          type: splitter
-          orientation: vertical
-          sizes: [ 585, 234 ]
-          children: 
-            - 
-              type: splitter
-              orientation: horizontal
-              sizes: [ 504, 572 ]
-              children: 
-                - 
-                  type: pane
-                  views: [ 4 ]
-                  current: 4
-                - 
-                  type: pane
-                  views: [ 3 ]
-                  current: 3
-            - 
-              type: pane
-              views: [ 2 ]
-              current: 2
+          near: 0.04
+          far: 200
+      backgroundColor: [ 0.1, 0.1, 0.3 ]
+      gridColor: [ 0.9, 0.9, 0.9, 1 ]
+      xzgridColor: [ 0.9, 0.9, 0.9, 1 ]
+      yzgridColor: [ 0.9, 0.9, 0.9, 1 ]
+      isDedicatedItemCheckEnabled: false

@@ -4,8 +4,8 @@ target_link_libraries(JoyInputController ${roscpp_LIBRARIES})
 choreonoid_add_simple_controller(JointStateOutputController JointStateOutputController.cpp)
 target_link_libraries(JointStateOutputController ${roscpp_LIBRARIES})
 
-choreonoid_add_simple_controller(JointStateInputController JointStateInputController.cpp)
-target_link_libraries(JointStateInputController ${roscpp_LIBRARIES})
+choreonoid_add_simple_controller(JointStateSubscriber JointStateSubscriber.cpp)
+target_link_libraries(JointStateSubscriber ${CHOREONOID_BODY_PLUGIN_LIBRARIES} ${roscpp_LIBRARIES})
 
 choreonoid_add_simple_controller(ImuOutputController ImuOutputController.cpp)
 target_link_libraries(ImuOutputController ${roscpp_LIBRARIES})

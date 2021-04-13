@@ -28,7 +28,7 @@ public:
     {
         ioBody = io->body();
 
-        const int n = ioBody->numJoints();
+        int n = ioBody->numJoints();
         jointState.name.resize(n);
         jointState.position.resize(n);
         jointState.velocity.resize(n);
@@ -42,7 +42,7 @@ public:
 
         time = 0.0;
         timeStep = io->timeStep();
-        const double frequency = 20.0;
+        const double frequency = 50.0;
         cycleTime = 1.0 / frequency;
         timeCounter = 0.0;
 

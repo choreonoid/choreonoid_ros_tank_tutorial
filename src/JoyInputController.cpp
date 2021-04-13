@@ -14,7 +14,7 @@ const int turretAxisID[] = { Joystick::R_STICK_H_AXIS, Joystick::R_STICK_V_AXIS 
 class JoyInputController : public SimpleController
 {
     std::unique_ptr<ros::NodeHandle> node;
-    ros::Subscriber joystickSubscriber;
+    ros::Subscriber subscriber;
     sensor_msgs::Joy latestJoystickState;
     std::mutex joystickMutex;
     
@@ -57,7 +57,7 @@ public:
             io->enableIO(joint);
         }
 
-        joystickSubscriber = node->subscribe(
+        subscriber = node->subscribe(
             "joy", 1, &JoyInputController::joystickCallback, this);
 
         return true;
@@ -114,7 +114,7 @@ public:
 
     virtual void stop() override
     {
-        joystickSubscriber.shutdown();
+        subscriber.shutdown();
     }
 };
 
