@@ -1,21 +1,22 @@
 #include <cnoid/SimpleController>
 #include <cnoid/AccelerationSensor>
 #include <cnoid/RateGyroSensor>
-#include <cnoid/ConnectionSet>
 #include <ros/node_handle.h>
 #include <sensor_msgs/Imu.h>
 
 using namespace std;
 using namespace cnoid;
 
-class ImuOutputController : public SimpleController
+class RttImuStatePublisher : public SimpleController
 {
-    AccelerationSensorPtr accelSensor;
-    RateGyroSensorPtr gyro;
-    ScopedConnectionSet sensorConnections;
     std::unique_ptr<ros::NodeHandle> node;
     ros::Publisher imuPublisher;
     sensor_msgs::Imu imu;
+    AccelerationSensorPtr accelSensor;
+    RateGyroSensorPtr gyro;
+    Vector3 dv_sum;
+    Vector3 w_sum;
+    int sensingSteps;
     double time;
     double timeStep;
     double cycleTime;
@@ -31,31 +32,15 @@ public:
 
     virtual bool initialize(SimpleControllerIO* io) override
     {
-        accelSensor = io->body()->findDevice<AccelerationSensor>("ACCEL_SENSOR");
-        gyro = io->body()->findDevice<RateGyroSensor>("GYRO");
-        
+        accelSensor = io->body()->findDevice<AccelerationSensor>();
+        gyro = io->body()->findDevice<RateGyroSensor>();
+
         io->enableInput(accelSensor);
         io->enableInput(gyro);
 
-        sensorConnections.disconnect();
-
-        sensorConnections.add(
-            accelSensor->sigStateChanged().connect(
-                [&](){
-                    auto dv = accelSensor->dv();
-                    imu.linear_acceleration.x = dv.x();
-                    imu.linear_acceleration.y = dv.y();
-                    imu.linear_acceleration.z = dv.z();
-                }));
-
-        sensorConnections.add(
-            gyro->sigStateChanged().connect(
-                [&](){
-                    auto w = gyro->w();
-                    imu.angular_velocity.x = w.x();
-                    imu.angular_velocity.y = w.y();
-                    imu.angular_velocity.z = w.z();
-                }));
+        dv_sum.setZero();
+        w_sum.setZero();
+        sensingSteps = 0;
 
         for(int i=0; i < 9; ++i){
             imu.orientation_covariance[i] = 0.0;
@@ -79,12 +64,32 @@ public:
 
     virtual bool control() override
     {
+        dv_sum += accelSensor->dv();
+        w_sum += gyro->w();
+        ++sensingSteps;
+        
         time += timeStep;
         timeCounter += timeStep;
 
         if(timeCounter >= cycleTime){
             imu.header.stamp.fromSec(time);
+
+            auto dv = dv_sum / sensingSteps;
+            imu.linear_acceleration.x = dv.x();
+            imu.linear_acceleration.y = dv.y();
+            imu.linear_acceleration.z = dv.z();
+            dv_sum.setZero();
+
+            auto w = w_sum / sensingSteps;
+            imu.angular_velocity.x = w.x();
+            imu.angular_velocity.y = w.y();
+            imu.angular_velocity.z = w.z();
+            w_sum.setZero();
+
+            sensingSteps = 0;
+            
             imuPublisher.publish(imu);
+            
             timeCounter -= cycleTime;
         }
 
@@ -92,4 +97,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(ImuOutputController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(RttImuStatePublisher)

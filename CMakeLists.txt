@@ -7,8 +7,6 @@ if(NOT CMAKE_BUILD_TYPE)
     FORCE)
 endif()
 
-set(CHOREONOID_SKIP_QT_CONFIG true)
-
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
@@ -22,15 +20,6 @@ catkin_package(SKIP_CMAKE_CONFIG_GENERATION SKIP_PKG_CONFIG_GENERATION)
 set(CMAKE_CXX_STANDARD ${CHOREONOID_CXX_STANDARD})
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set_property(DIRECTORY APPEND PROPERTY COMPILE_DEFINITIONS ${CHOREONOID_COMPILE_DEFINITIONS})
-
-include_directories(
-  ${catkin_INCLUDE_DIRS} 
-  ${CHOREONOID_INCLUDE_DIRS}
-  )
-
-link_directories(
-  ${CHOREONOID_LIBRARY_DIRS}
-  )
+include_directories(${catkin_INCLUDE_DIRS})
 
 add_subdirectory(src)

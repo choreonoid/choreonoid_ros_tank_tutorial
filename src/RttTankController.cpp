@@ -6,12 +6,7 @@
 
 using namespace cnoid;
 
-namespace {
-const int trackAxisID[]  = { Joystick::L_STICK_H_AXIS, Joystick::L_STICK_V_AXIS };
-const int turretAxisID[] = { Joystick::R_STICK_H_AXIS, Joystick::R_STICK_V_AXIS };
-}
-
-class JoyInputController : public SimpleController
+class RttTankController : public SimpleController
 {
     std::unique_ptr<ros::NodeHandle> node;
     ros::Subscriber subscriber;
@@ -58,7 +53,7 @@ public:
         }
 
         subscriber = node->subscribe(
-            "joy", 1, &JoyInputController::joystickCallback, this);
+            "joy", 1, &RttTankController::joystickCallback, this);
 
         return true;
     }
@@ -79,6 +74,11 @@ public:
         joystick.axes.resize(Joystick::NUM_STD_AXES, 0.0f);
         joystick.buttons.resize(Joystick::NUM_STD_BUTTONS, 0);
             
+        static const int trackAxisID[] =
+            { Joystick::L_STICK_H_AXIS, Joystick::L_STICK_V_AXIS };
+        static const int turretAxisID[] =
+            { Joystick::R_STICK_H_AXIS, Joystick::R_STICK_V_AXIS };
+
         double pos[2];
         for(int i=0; i < 2; ++i){
             pos[i] = joystick.axes[trackAxisID[i]];
@@ -118,4 +118,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(JoyInputController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(RttTankController)

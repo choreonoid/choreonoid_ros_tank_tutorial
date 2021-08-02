@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cnoid;
 
-class CameraImageOutputController : public SimpleController
+class RttCameraImagePublisher : public SimpleController
 {
     CameraPtr camera;
     ScopedConnection cameraConnection;
@@ -70,4 +70,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(CameraImageOutputController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(RttCameraImagePublisher)

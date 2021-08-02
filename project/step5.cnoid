@@ -6,166 +6,106 @@ items:
   children: 
     - 
       id: 1
-      name: "World"
+      name: "Tank"
       plugin: Body
-      class: WorldItem
+      class: BodyItem
+      is_selected: true
+      is_checked: true
       data: 
-        collisionDetection: false
-        collisionDetector: AISTCollisionDetector
-        materialTableFile: "${SHARE}/default/materials.yaml"
+        file: "${SHARE}/model/Tank/Tank.body"
+        format: CHOREONOID-BODY
+        rootPosition: [ -2, -0.5, 0.1 ]
+        rootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        jointDisplacements: [ 2.95517e-09, -0.561853, 0, 0 ]
+        initialJointDisplacements: [ 0, 0, 0, 0 ]
+        jointPositions: [ 5.15774e-11, -0.00980618, 0, 0 ]
+        initialRootPosition: [ -2, -0.5, 0.1 ]
+        initialRootAttitude: [ 
+          1, 0, 0, 
+          0, 1, 0, 
+          0, 0, 1 ]
+        initialJointPositions: [ 0, 0, 0, 0 ]
+        staticModel: false
+        collisionDetection: true
+        selfCollisionDetection: false
+        location_editable: true
+        scene_sensitive: true
+        zmp: [ 0, 0, 0 ]
       children: 
         - 
           id: 2
-          name: "Tank"
+          name: "RttJointStateSubscriber"
           plugin: Body
-          class: BodyItem
+          class: SimpleControllerItem
           data: 
-            modelFile: "${SHARE}/model/Tank/Tank.body"
-            currentBaseLink: ""
-            rootPosition: [ -2, -0.5, 0.1 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [  0.000000,  0.000000 ]
-            jointPositions: [  0.000000,  0.000000 ]
-            initialRootPosition: [ -2, -0.5, 0.1 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [  0.000000,  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: true
-          children: 
-            - 
-              id: 3
-              name: "JoyInputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: true
-                controllerOptions: ""
-                controller: "JoyInputController"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-            - 
-              id: 4
-              name: "JointStateOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "JointStateOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-            - 
-              id: 5
-              name: "ImuOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "ImuOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-            - 
-              id: 6
-              name: "CameraImageOutputController"
-              plugin: Body
-              class: SimpleControllerItem
-              data: 
-                isNoDelayMode: false
-                controllerOptions: ""
-                controller: "CameraImageOutputController.so"
-                baseDirectory: "Controller directory"
-                reloading: false
-                exportSymbols: false
-                isOldTargetVariableMode: false
-        - 
-          id: 7
-          name: "Labo1"
-          plugin: Body
-          class: BodyItem
-          data: 
-            modelFile: "${SHARE}/model/Labo1/Labo1.body"
-            currentBaseLink: ""
-            rootPosition: [ 0, 0, 0 ]
-            rootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            jointDisplacements: [  0.000000 ]
-            jointPositions: [  0.000000 ]
-            initialRootPosition: [ 0, 0, 0 ]
-            initialRootAttitude: [ 
-              1, 0, 0, 
-              0, 1, 0, 
-              0, 0, 1 ]
-            initialJointPositions: [  0.000000 ]
-            zmp: [ 0, 0, 0 ]
-            collisionDetection: true
-            selfCollisionDetection: false
-            isEditable: false
-        - 
-          id: 8
-          name: "AISTSimulator"
-          plugin: Body
-          class: AISTSimulatorItem
-          data: 
-            timeStep: 0.001
-            realtimeSync: true
-            recording: "off"
-            timeRangeMode: "Unlimited"
-            timeLength: 60
-            allLinkPositionOutputMode: false
-            deviceStateOutput: true
-            controllerThreads: true
-            recordCollisionData: false
+            isNoDelayMode: true
             controllerOptions: ""
-            dynamicsMode: "Forward dynamics"
-            integrationMode: "Runge Kutta"
-            gravity: [ 0, 0, -9.80665 ]
-            staticFriction: 0.5
-            dynamicFriction: 0.5
-            cullingThresh: 0.01
-            contactCullingDepth: 0.05
-            errorCriterion: 0.001
-            maxNumIterations: 1000
-            contactCorrectionDepth: 0.0001
-            contactCorrectionVelocityRatio: 30
-            kinematicWalking: false
-            2Dmode: false
-            oldAccelSensorMode: false
-          children: 
-            - 
-              id: 9
-              name: "GLVisionSimulator"
-              plugin: Body
-              class: GLVisionSimulatorItem
-              data: 
-                enabled: true
-                maxFrameRate: 1000
-                maxLatency: 1
-                recordVisionData: false
-                threadMode: Sensor
-                bestEffort: true
-                allSceneObjects: false
-                rangeSensorPrecisionRatio: 2
-                depthError: 0
-                enableHeadLight: true
-                enableAdditionalLights: true
-                antiAliasing: false
+            controller: "RttJointStateSubscriber"
+            base_directory: "Controller directory"
+            reloading: false
+            export_symbols: false
+        - 
+          id: 3
+          name: "RttImuStateSubscriber"
+          plugin: Body
+          class: SimpleControllerItem
+          data: 
+            isNoDelayMode: true
+            controllerOptions: ""
+            controller: "RttImuStateSubscriber"
+            base_directory: "Controller directory"
+            reloading: false
+            export_symbols: false
+        - 
+          id: 4
+          name: "SensorVisualizer"
+          plugin: Body
+          class: SensorVisualizerItem
+          data: 
+            sub_items: 
+              - 
+                class: AccelerationSensorVisualizerItem
+                name: AccelerationSensor
+                is_checked: true
+                visual_ratio: 0.1
+                threshold: 0.05
+                offset: [ 0, 0, -9.8 ]
+              - 
+                class: RateGyroSensorVisualizerItem
+                name: RateGyro
+                is_checked: true
+                visual_ratio: 0.4
+                threshold: 0.01
+                offset: [ 0, 0, 0 ]
+              - 
+                class: CameraImageVisualizerItem
+                name: Kinect-Image
+              - 
+                class: CameraImageVisualizerItem
+                name: Theta
+              - 
+                class: PointCloudVisualizerItem
+                name: Kinect
+                translation: [ 0, 0, 0 ]
+                rotation: [ 1, 0, 0, 0 ]
+                angle_unit: degree
+                rendering_mode: Point
+                point_size: 0
+                voxel_size: 0.01
+                is_editable: false
+              - 
+                class: RangeSensorVisualizerItem
+                name: VLP-16
+                translation: [ 0, 0, 0 ]
+                rotation: [ 1, 0, 0, 0 ]
+                angle_unit: degree
+                rendering_mode: Point
+                point_size: 0
+                voxel_size: 0.01
+                is_editable: false
 views: 
   - 
     id: 0
@@ -178,173 +118,70 @@ views:
     class: ItemTreeView
     mounted: true
     state: 
-      checked: [ 1, 2, 7 ]
-      expanded: [ 1, 2, 8 ]
+      expanded: [ 1, 4 ]
   - 
     id: 2
     plugin: Base
-    class: MessageView
+    class: LocationView
     mounted: true
   - 
     id: 3
     plugin: Base
-    class: SceneView
+    class: MessageView
     mounted: true
-    state: 
-      editMode: false
-      viewpointControlMode: thirdPerson
-      collisionLines: false
-      polygonMode: fill
-      restrictCameraRoll: true
-      verticalAxis: Z
-      lightingMode: full
-      cullingMode: enabled
-      defaultHeadLight: true
-      defaultHeadLightIntensity: 0.5
-      headLightLightingFromBack: false
-      worldLight: false
-      worldLightIntensity: 0.1
-      worldLightAmbient: 0
-      additionalLights: true
-      shadowLights: 
-        - 1
-        - 2
-      fog: true
-      floorGrid: false
-      floorGridSpan: 10
-      floorGridInterval: 0.5
-      xzGridSpan: 10
-      xzGridInterval: 0.5
-      xzGrid: false
-      yzGridSpan: 10
-      yzGridInterval: 0.5
-      texture: true
-      lineWidth: 1
-      pointSize: 1
-      normalVisualization: false
-      normalLength: 0.01
-      lightweightViewChange: false
-      coordinateAxes: true
-      fpsTestIteration: 1
-      upsideDown: false
-      cameras: 
-        - 
-          camera: [ System, Perspective ]
-          isCurrent: true
-          fieldOfView: 0.6978
-          near: 0.01
-          far: 10000
-          eye: [ -6.44723288, -3.30408906, 3.23335936 ]
-          direction: [ 0.819988251, 0.45015162, -0.353529047 ]
-          up: [ 0.309902039, 0.170127932, 0.935423547 ]
-        - 
-          camera: [ System, Orthographic ]
-          orthoHeight: 20
-          near: 0.01
-          far: 10000
-      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
-      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      dedicatedItemTreeViewChecks: false
   - 
     id: 4
-    name: "Scene 2"
     plugin: Base
     class: SceneView
     mounted: true
     state: 
-      editMode: false
-      viewpointControlMode: thirdPerson
-      collisionLines: false
-      polygonMode: fill
-      restrictCameraRoll: true
-      verticalAxis: Z
-      lightingMode: full
-      cullingMode: enabled
-      defaultHeadLight: true
-      defaultHeadLightIntensity: 0.5
-      headLightLightingFromBack: false
-      worldLight: false
-      worldLightIntensity: 0.5
-      worldLightAmbient: 0.3
-      additionalLights: true
-      shadowLights: 
-        - 1
-        - 2
-      fog: true
-      floorGrid: false
-      floorGridSpan: 10
-      floorGridInterval: 0.5
-      xzGridSpan: 10
-      xzGridInterval: 0.5
-      xzGrid: false
-      yzGridSpan: 10
-      yzGridInterval: 0.5
-      texture: true
-      lineWidth: 1
-      pointSize: 1
-      normalVisualization: false
-      normalLength: 0.01
-      lightweightViewChange: false
-      coordinateAxes: true
-      fpsTestIteration: 1
-      upsideDown: false
+      visible_polygon_elements: [ edge ]
+      backgroundColor: [ 1, 1, 1 ]
       cameras: 
         - 
           camera: [ System, Perspective ]
-          fieldOfView: 0.6978
-          near: 0.01
-          far: 100
-          eye: [ -5.29126118, -5.01169376, 3.84184278 ]
-          direction: [ 0.756596254, 0.487150344, -0.43617273 ]
-          up: [ 0.3667299, 0.236126726, 0.899862962 ]
+          isCurrent: true
+          fieldOfView: 0.610865
+          near: 0.04
+          far: 200
+          eye: [ 0.243261, 0.92897, 1.04852 ]
+          direction: [ -0.795439, -0.525303, -0.302213 ]
+          up: [ -0.252184, -0.166541, 0.95324 ]
         - 
           camera: [ System, Orthographic ]
           orthoHeight: 20
-          near: 0.01
-          far: 100
-        - 
-          camera: [ Tank, Kinect ]
-          isCurrent: true
-      backgroundColor: [ 0.100000001, 0.100000001, 0.300000012 ]
-      gridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      xzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      yzgridColor: [ 0.899999976, 0.899999976, 0.899999976, 1 ]
-      dedicatedItemTreeViewChecks: false
+          near: 0.04
+          far: 200
   - 
     id: 5
     plugin: Body
-    class: BodyLinkView
-    state: 
-      showRotationMatrix: false
+    class: BodyStateView
+    mounted: true
   - 
     id: 6
     plugin: Body
     class: JointDisplacementView
-    state: 
-      showSelectedJoints: false
-      showJointIDs: false
-      showJointNames: true
-      overlapJointNames: false
-      showSliders: true
-      showDials: false
-      showPhases: false
+    mounted: true
   - 
     id: 7
     plugin: Body
-    class: LinkSelectionView
-    state: 
-      listingMode: "Link List"
-      currentBodyItem: 2
-      bodyItems: 
-        - 
-          id: 2
-          selectedLinks: [ 0 ]
+    class: LinkDeviceListView
+    mounted: true
   - 
     id: 8
+    plugin: Body
+    class: LinkPositionView
+    mounted: true
+  - 
+    id: 9
+    plugin: Body
+    class: LinkPropertyView
+    mounted: true
+  - 
+    id: 10
     plugin: Python
     class: PythonConsoleView
+    mounted: true
 viewAreas: 
   - 
     type: embedded
@@ -352,40 +189,54 @@ viewAreas:
     contents: 
       type: splitter
       orientation: horizontal
-      sizes: [ 254, 1082 ]
+      sizes: [ 1374, 436 ]
       children: 
         - 
           type: splitter
-          orientation: vertical
-          sizes: [ 410, 409 ]
-          children: 
-            - 
-              type: pane
-              views: [ 1 ]
-              current: 1
-            - 
-              type: pane
-              views: [ 0 ]
-              current: 0
-        - 
-          type: splitter
-          orientation: vertical
-          sizes: [ 585, 234 ]
+          orientation: horizontal
+          sizes: [ 355, 1015 ]
           children: 
             - 
               type: splitter
-              orientation: horizontal
-              sizes: [ 504, 572 ]
+              orientation: vertical
+              sizes: [ 776, 776 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 1 ]
+                - 
+                  type: pane
+                  views: [ 0, 9 ]
+                  current: 0
+            - 
+              type: splitter
+              orientation: vertical
+              sizes: [ 1164, 388 ]
               children: 
                 - 
                   type: pane
                   views: [ 4 ]
-                  current: 4
                 - 
                   type: pane
-                  views: [ 3 ]
-                  current: 3
+                  views: [ 3, 10, 5 ]
+                  current: 5
+        - 
+          type: splitter
+          orientation: vertical
+          sizes: [ 354, 1198 ]
+          children: 
             - 
               type: pane
               views: [ 2 ]
-              current: 2
+            - 
+              type: splitter
+              orientation: vertical
+              sizes: [ 480, 714 ]
+              children: 
+                - 
+                  type: pane
+                  views: [ 8 ]
+                - 
+                  type: pane
+                  views: [ 7, 6 ]
+                  current: 6

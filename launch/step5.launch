@@ -1,6 +1,8 @@
 <launch>
   <node pkg="choreonoid_joy" name="choreonoid_joy" type="node" />
   <node pkg="choreonoid_ros" name="choreonoid" type="choreonoid"
-	args="$(find choreonoid_ros_tank_tutorial)/project/step5.cnoid --start-simulation" />
-  <node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view" args="image:=/Tank/camera/image" />
+	args="$(find choreonoid_ros_tank_tutorial)/project/step4.cnoid --start-simulation" />
+  <node pkg="rqt_graph" name="rqt_graph" type="rqt_graph" />
+  <node pkg="choreonoid_ros" name="choreonoid2" type="choreonoid"
+	args="$(find choreonoid_ros_tank_tutorial)/project/step5.cnoid" />
 </launch>

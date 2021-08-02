@@ -35,13 +35,13 @@ items:
       children: 
         - 
           id: 2
-          name: "JointStateSubscriber"
+          name: "RttJointStateSubscriber"
           plugin: Body
           class: SimpleControllerItem
           data: 
             isNoDelayMode: true
             controllerOptions: ""
-            controller: "JointStateSubscriber"
+            controller: "RttJointStateSubscriber"
             baseDirectory: "Controller directory"
             reloading: false
             exportSymbols: false
@@ -75,8 +75,3 @@ views:
           orthoHeight: 20
           near: 0.04
           far: 200
-      backgroundColor: [ 0.1, 0.1, 0.3 ]
-      gridColor: [ 0.9, 0.9, 0.9, 1 ]
-      xzgridColor: [ 0.9, 0.9, 0.9, 1 ]
-      yzgridColor: [ 0.9, 0.9, 0.9, 1 ]
-      isDedicatedItemCheckEnabled: false

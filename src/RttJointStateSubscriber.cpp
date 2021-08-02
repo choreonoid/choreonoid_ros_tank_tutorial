@@ -7,7 +7,7 @@
 using namespace std;
 using namespace cnoid;
 
-class JointStateSubscriber : public SimpleController
+class RttJointStateSubscriber : public SimpleController
 {
     std::unique_ptr<ros::NodeHandle> node;
     ros::Subscriber subscriber;
@@ -21,7 +21,7 @@ public:
         subscriber = node->subscribe(
             string("/") + bodyItem->name() + "/joint_state",
             1,
-            &JointStateSubscriber::jointStateCallback, this);
+            &RttJointStateSubscriber::jointStateCallback, this);
         return true;
     }
 
@@ -54,4 +54,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(JointStateSubscriber)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(RttJointStateSubscriber)

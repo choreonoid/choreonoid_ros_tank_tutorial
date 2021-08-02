@@ -5,7 +5,7 @@
 using namespace std;
 using namespace cnoid;
 
-class JointStateOutputController : public SimpleController
+class RttJointStatePublisher : public SimpleController
 {
     BodyPtr ioBody;
     std::unique_ptr<ros::NodeHandle> node;
@@ -74,4 +74,4 @@ public:
     }
 };
 
-CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(JointStateOutputController)
+CNOID_IMPLEMENT_SIMPLE_CONTROLLER_FACTORY(RttJointStatePublisher)

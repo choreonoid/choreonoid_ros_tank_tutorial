@@ -42,39 +42,39 @@ items:
           children: 
             - 
               id: 3
-              name: "JoyInputController"
+              name: "RttTankController"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: true
                 controllerOptions: ""
-                controller: "JoyInputController"
+                controller: "RttTankController"
                 baseDirectory: "Controller directory"
                 reloading: false
                 exportSymbols: false
                 isOldTargetVariableMode: false
             - 
               id: 4
-              name: "JointStateOutputController"
+              name: "RttJointStatePublisher"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: false
                 controllerOptions: ""
-                controller: "JointStateOutputController.so"
+                controller: "RttJointStatePublisher.so"
                 baseDirectory: "Controller directory"
                 reloading: false
                 exportSymbols: false
                 isOldTargetVariableMode: false
             - 
               id: 5
-              name: "ImuOutputController"
+              name: "RttImuStatePublisher"
               plugin: Body
               class: SimpleControllerItem
               data: 
                 isNoDelayMode: false
                 controllerOptions: ""
-                controller: "ImuOutputController.so"
+                controller: "RttImuStatePublisher.so"
                 baseDirectory: "Controller directory"
                 reloading: false
                 exportSymbols: false

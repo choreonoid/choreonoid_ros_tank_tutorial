@@ -1,14 +1,29 @@
-choreonoid_add_simple_controller(JoyInputController JoyInputController.cpp)
-target_link_libraries(JoyInputController ${roscpp_LIBRARIES})
+# Step 1
+choreonoid_add_simple_controller(RttTankController RttTankController.cpp)
+target_link_libraries(RttTankController ${roscpp_LIBRARIES})
 
-choreonoid_add_simple_controller(JointStateOutputController JointStateOutputController.cpp)
-target_link_libraries(JointStateOutputController ${roscpp_LIBRARIES})
+# Step 2
+choreonoid_add_simple_controller(RttJointStatePublisher RttJointStatePublisher.cpp)
+target_link_libraries(RttJointStatePublisher ${roscpp_LIBRARIES})
 
-choreonoid_add_simple_controller(JointStateSubscriber JointStateSubscriber.cpp)
-target_link_libraries(JointStateSubscriber ${CHOREONOID_BODY_PLUGIN_LIBRARIES} ${roscpp_LIBRARIES})
+# Step 3
+choreonoid_add_simple_controller(RttJointStateSubscriber RttJointStateSubscriber.cpp)
+target_link_libraries(RttJointStateSubscriber ${roscpp_LIBRARIES} Choreonoid::CnoidBodyPlugin)
 
-choreonoid_add_simple_controller(ImuOutputController ImuOutputController.cpp)
-target_link_libraries(ImuOutputController ${roscpp_LIBRARIES})
+# Step 4
+choreonoid_add_simple_controller(RttImuStatePublisher RttImuStatePublisher.cpp)
+target_link_libraries(RttImuStatePublisher ${roscpp_LIBRARIES})
 
-choreonoid_add_simple_controller(CameraImageOutputController CameraImageOutputController.cpp)
-target_link_libraries(CameraImageOutputController ${roscpp_LIBRARIES} ${image_transport_LIBRARIES})
+# Step 5
+choreonoid_add_simple_controller(RttImuStateSubscriber RttImuStateSubscriber.cpp)
+target_link_libraries(RttImuStateSubscriber ${roscpp_LIBRARIES} Choreonoid::CnoidBodyPlugin)
+
+# Step 6
+choreonoid_add_simple_controller(RttCameraImagePublisher RttCameraImagePublisher.cpp)
+target_link_libraries(RttCameraImagePublisher ${roscpp_LIBRARIES} ${image_transport_LIBRARIES})
+
+#choreonoid_add_simple_controller(Rtt3dSensorImagePublisher Rtt3dSensorImagePublisher.cpp)
+#target_link_libraries(Rtt3dSensorImagePublisher ${roscpp_LIBRARIES} ${image_transport_LIBRARIES})
+
+#choreonoid_add_simple_controller(Rtt3dSensorImageSubscriber Rtt3dSensorImageSubscriber.cpp)
+#target_link_libraries(Rtt3dSensorImageSubscriber ${roscpp_LIBRARIES} ${image_transport_LIBRARIES})
